@@ -1,0 +1,41 @@
+-***********************************************                                
+-* Resource Management                         *                                
+-* Do not remove or change the following lines *                                
+-***********************************************                                
+-SET &&MFDSUFF    = 'SQLORA';                                                   
+-SET &&MFDSEGTP   = 'S0';                                                       
+-SET &&CONN       = 'SSSOU_SRV' ;                                               
+-SET &&TBLNAME01  = 'webfcs.SMSERVERS_7707' ;                                   
+-SET &&TBLNAME02  = 'webfcs.SMSESSIONS_7707' ;                                  
+-SET &&TBLNAME02  = 'webfcs.SMSESSIONS_7707' ;                                  
+-SET &&TBLNAME03  = 'webfcs.SMRPCS_7707' ;                                      
+-SET &&TBLNAME04  = 'webfcs.SMRPCREQUESTS_7707' ;                               
+-SET &&TBLNAME05  = 'webfcs.SMRPCWF_7707' ;                                     
+-SET &&TBLNAME06  = 'webfcs.SMQUERY_7707' ;                                     
+-SET &&TBLNAME07  = 'webfcs.SMREQUESTS_7707' ;                                  
+-SET &&TBLNAME08  = 'webfcs.SMGOVERN_7707' ;                                    
+-SET &&TBLNAME09  = 'webfcs.SMREMOTES_7707' ;                                   
+-SET &&TBLNAME10  = 'webfcs.SMFROMS_7707' ;                                     
+-SET &&TBLNAME11  = 'webfcs.SMCOLUMNS_7707' ;                                   
+-SET &&TBLNAME12  = 'webfcs.SMFUNCTIONS_7707' ;                                 
+-SET &&TBLNAME13  = 'webfcs.SMRELATIONS_7707' ;                                 
+-SET &&TBLNAME14  = 'webfcs.SMAUDIT_7707' ;                                     
+-SET &SUFFIX = 'SQLORA' ;                                                       
+-* SET THE CONVERSION PRECISION FOR SQL IMPLEMENTATIONS                         
+-SET &DECORFLOAT = IF &SUFFIX NE 'SQLORA' THEN 'DECIMAL' ELSE 'FLOAT' ;         
+SQL &SUFFIX SET CONVERSION &DECORFLOAT PRECISION 11 0                           
+SQL &SUFFIX SET PASSRECS OFF                                                    
+-RUN                                                                            
+SET ASNAME = ON                                                                 
+SET SQLENGINE = OFF                                                             
+-IF &&RMARCLOD.EXISTS THEN GOTO :PRF3000 ;                                      
+SET CASESTAT = OFF                                                              
+-:PRF3000                                                                       
+SET PANEL = 9999                                                                
+SET NODATA = ' '                                                                
+SET REQSCOPE = DEFAULT                                                          
+-? SET SMARTMODE &SMARTMODE                                                     
+-IF &SMARTMODE EQ 'OFF' THEN GOTO :PRF3001;                                     
+GKE %GOVERN_OFF                                                                 
+-RUN                                                                            
+-:PRF3001                                                                       
